@@ -1,0 +1,27 @@
+
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "topic_classifier"
+task: "judge"
+prompt: |
+  Your task is to classify the following math problem into one of several topics based on its content and the mathematical concepts it involves. The topics to choose from are:
+  - Algebra
+  - Geometry
+  - Number Theory
+  - Combinatorics
+  - Calculus
+  - Logic and Puzzles
+
+  Output the topic that best fits the problem in \\boxed{{}}, i.e. \\boxed{{Algebra}}, at the end of your resposne.
+
+  Here are the problem statement and solution:
+
+  Problem:
+
+  {problem}
+
+  Solution:
+
+  {solution}
+data_path: "data/raw/matharena_proofs/sample_sol.json"
+n_solutions: -1

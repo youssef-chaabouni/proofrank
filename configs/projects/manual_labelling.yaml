@@ -1,0 +1,13 @@
+name: "Sycophancy Bench (Original Recent Problems)"
+slug: "manual_labelling"
+admins:
+  - "proofrank-1"
+
+model_configs:
+  - "gemini/gemini-pro-2.5"
+  - "openai/gpt-52"
+  - "deepseek/deepseek_v32"
+  - "openai/oss-120b"
+  - "qwen/qwen3_235b_a22b"
+  - "xai/grok-41-fast-reasoning"
+  - "gemini/gemini-pro-3-preview"

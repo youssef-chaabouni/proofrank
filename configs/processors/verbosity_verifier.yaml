@@ -1,0 +1,24 @@
+
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "verbosity_verifier"
+task: "judge"
+prompt: |
+  Your task is to verify whether the following solution to a mathematical problem has been successfully rephrased to be less verbose while retaining all important details. Follow these guidelines:
+  - Check that all critical steps and explanations necessary for understanding the solution are still present.
+  - Ensure that no new information has been introduced and that the meaning of the original solution has not been changed.
+  - Confirm that the rephrased solution is equivalent to the original in terms of correctness and completeness.
+  - Verify that no computations critical to the solution have been omitted.
+  - If the rephrased solution meets all these criteria, conclude with "\\boxed{{Yes}}". If it fails any of these criteria, conclude with "\\boxed{{No}}".
+
+
+  Original Problem:
+  {problem}
+
+  Original Solution:
+  {solution}
+
+  Shortened Solution:
+  {outputs}
+data_path: "outputs/verbosity_rephrase/openai/oss-120b/"
+n_solutions: -1

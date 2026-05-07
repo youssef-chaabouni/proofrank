@@ -1,0 +1,10 @@
+model: gemini-3.1-pro-preview--high
+api: google
+temperature: null
+top_p: null
+concurrent_requests: 32
+max_tokens: 160000
+read_cost: 2
+write_cost: 12
+human_readable_id: gemini-3.1-pro-preview
+date: "2025-11-18"

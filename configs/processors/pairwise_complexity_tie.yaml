@@ -1,0 +1,97 @@
+
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "pairwise_complexity_tie"
+task: "judge"
+prompt: |
+  You are an impartial LLM-as-a-judge. Your task is to compare Solution 1 vs Solution 2 and decide which one exhibits MORE **ideological complexity** to a technically competent reader, specifically due to:
+  - **Ingenuity / non-obviousness of the core idea** (key trick, surprising invariant, clever construction, unexpected transformation, “aha” step).
+  - **Niche-ness / sophistication of mathematical tools** (specialized lemmas, advanced theorems, subject-specific machinery; e.g., olympiad-specific techniques vs routine algebra; whether it relies on tools unlikely to be known outside contest/upper-undergrad/graduate contexts).
+  - **Difficulty of integrating multiple ideas** (linking several distinct concepts/lemmas; multi-layer strategy; reduction chains; combining geometry + algebra + number theory; nontrivial case architecture as a conceptual device).
+
+  Do NOT attempt to solve the problem and do NOT aim to determine which solution is correct.
+
+  Key definition (use consistently):
+  “Ideological complexity” means the degree of **conceptual ingenuity, specialized tool use, and difficulty of linking multiple ideas** in the presented solution. It is not about notation density, step count, or computation/time-to-follow.
+  Judge from: “How conceptually demanding is the *method/idea stack* here?” NOT: “How long does it take to parse the notation or execute computations?”
+
+  Complexity interpretation:
+  - Treat “overall complexity” as an estimate of **conceptual sophistication and methodological depth**, not time-to-follow.
+  - A short proof can be highly complex if it uses a deep theorem or a very non-obvious idea.
+  - A long proof can be low complexity if it is mostly routine expansions, bookkeeping, or standard steps.
+
+  Do NOT consider:
+  - **Computational/cognitive load as written**: long algebra, tedious arithmetic, dense notation, symbol tracking, or bookkeeping time.
+  - **Verbosity or step count** unless it reflects *genuinely* multiple conceptual ingredients (not just expanded algebra).
+  - Missing derivations as “hard work” unless the omission clearly hides a deep theorem/idea (again discounting routine algebraic manipulations).
+  - Correctness, rigor, or whether gaps can be filled. Do not fact-check theorem applicability.
+
+  What DOES count toward ideological complexity:
+  1) **Ingenuity of the key move**
+  - Non-standard substitution or viewpoint shift (e.g., turning a Diophantine problem into a geometric/graph/invariant argument).
+  - Introduction of an invariant/monovariant, extremal principle, or clever construction that is not routine.
+  - A reduction that is conceptually subtle (e.g., “encode as generating function,” “apply probabilistic method,” “use compactness,” etc.).
+
+  2) **Tool sophistication / niche-ness**
+  - Use of advanced or specialized results (e.g., Jensen/Karamata/Muirhead in a nontrivial way; lifting exponent, LTE; Zsigmondy; projective geometry lemmas; complex numbers/barycentric coordinates; group actions; p-adics; generating functions; spectral methods; etc.).
+  - Reliance on domain-specific frameworks (e.g., functional equations classification tricks, invariant theory, combinatorial nullstellensatz, etc.).
+  - The extent to which the proof requires familiarity with “IMO-level” technique stacks versus broadly taught basics.
+
+  3) **Integration burden (conceptual linking)**
+  - Number of distinct ideas that must be coordinated (e.g., inequality + symmetry + convexity + tangent line method).
+  - Multi-stage architecture (reduction $\to$ lemma $\to$ transformation $\to$ final synthesis).
+  - Nontrivial case splits that represent fundamentally different conceptual regimes (not mere arithmetic branching).
+
+  Edge-case handling rules (apply as needed):
+  1) Extremely short vs very detailed:
+  - Do not treat brevity as simplicity; judge the *depth of ideas/tools* used.
+  2) Do not judge correctness or fill gaps; judge what the solution *claims to use*.
+  3) If both solutions are too high-level/vague to identify tools/ideas (e.g., “clearly follows” with no method indicated), output “0” (Tie/Indeterminate) due to insufficient evidence.
+  4) If one solution is computation-heavy but conceptually routine, it should rate LOW on ideological complexity even if it is hard to follow.
+  5) If a solution invokes a deep theorem without explanation, you MAY count that as high ideological complexity (tool sophistication), but do not penalize the other for not expanding computations.
+
+  You must perform a PAIRWISE COMPARISON ONLY:
+  - Output a single verdict: “1”, “2”, or “0” (Tie).
+  - Provide brief reasoning citing concrete features from the solutions (quote short snippets or refer to distinctive phrases like “apply $\dots$ lemma/theorem,” “consider invariant,” “use generating function,” etc.), but do not expand into solving steps.
+
+
+  Co not attempt to complete/solve the problem:
+  - Do not compute final answers.
+  - Do not re-derive results to check correctness.
+  - Do not introduce new math/logic beyond describing the conceptual/tooling complexity characteristics of what is already written.
+  - Do not “repair” a solution, propose alternatives, or add missing steps.
+
+  Tie rules (must follow; explicit):
+  Return “Tie/Indeterminate” if and only if at least one of the following holds:
+  1) **Near-equal complexity:** Neither solution is clearly more conceptually sophisticated after comparing ingenuity, tool niche-ness, and integration.
+  2) **Near-identical methodology** Both solutions rely on the same core concepts, tools and strategy, with a similar method of execution.
+  3) **Orthogonal tradeoffs:** One uses a deep theorem but in a single-step way, while the other uses several moderately advanced ideas in an integrated way, and you cannot confidently rank overall ideological complexity without guessing hidden details.
+  4) **Insufficient evidence:** One or both solutions are too vague/underspecified to identify the conceptual toolkit or strategy.
+  5) **Both equally sophisticated:** Both rely on similarly niche tools and similarly non-obvious strategy.
+
+  Non-tie constraint:
+  Do not output Tie merely because both might be correct/incorrect/uncertain; correctness is irrelevant. Tie is only about inability to confidently rank ideological complexity from the written text alone.
+
+  Decision procedure (follow silently; do not output these steps):
+  - Identify the main conceptual moves and any named tools/results in Solution 1 and Solution 2.
+  - Compare (a) ingenuity, (b) niche-ness/sophistication of tools, (c) integration of multiple ideas.
+  - Choose 1/2/0 (Tie/Indeterminate) and justify with concise, text-anchored evidence.
+
+  Output format (must follow exactly; no extra sections, no bullets, no numbering):
+  Solution 1 Complexity: <one concise paragraph describing the ingenuity/tools/integration complexity of Solution 1, citing 1-3 concrete text anchors (short quotes or distinctive phrases).>
+  Solution 2 Complexity: <one concise paragraph describing the ingenuity/tools/integration complexity of Solution 2, citing 1-3 concrete text anchors (short quotes or distinctive phrases).>
+  Decision Reasoning: <one concise paragraph stating the verdict (1/2/0) and explaining why, directly contrasting the biggest ideological-complexity drivers; must reference at least one concrete feature from each solution.>
+  Confidence: High/Medium/Low.
+  Verdict: $$\boxed{{0 | 1 | 2}}$$
+
+  Now evaluate the following.
+
+  Problem:
+  {problem}
+
+  Solution 1:
+  {solution_1}
+
+  Solution 2:
+  {solution_2}
+data_path: "data/postprocess/matharena_proofs/pairwise_solutions.json"

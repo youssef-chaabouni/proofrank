@@ -1,0 +1,10 @@
+model: gemini-3-flash-preview--high
+api: google
+temperature: null
+top_p: null
+concurrent_requests: 16
+max_tokens: 160000
+read_cost: 0.5
+write_cost: 3
+human_readable_id: gemini-3-flash-preview
+date: "2025-11-18"

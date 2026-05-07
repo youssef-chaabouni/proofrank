@@ -1,0 +1,183 @@
+
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "summary_diversity_clustering_all"
+task: "diversity"
+prompt: |
+  Your task is to analyze multiple candidate proofs of the same problem and cluster them by their core mathematical method.
+
+  # Main Goal
+
+  Given one problem and $N$ proof summaries, determine which proofs are essentially the same method and which are meaningfully different methods.
+
+  Your job is not to grade correctness, elegance, or completeness, but to detect diversity of methods in a way that is stable and consistent.
+
+  # Pairwise consistency rule
+
+  For any pair of proofs, the same-cluster / different-cluster decision should be the same whether those two proofs are shown alone or inside a larger batch, regardless of the presence of other proofs.
+
+  # Method analysis framework
+
+  Analyze each proof at three levels:
+
+  1. **Family / viewpoint**  
+  The broad style, such as algebraic, geometric, combinatorial, constructive, extremal, invariant-based.
+
+  2. **Backbone**  
+  The main structural move that sets up the proof,  i.e. a geometric construction, polynomial-root encoding, decomposition, extremal choice, or reduction to a known theorem.
+
+  3. **Closing engine**  
+  The theorem, lemma, or decisive move that links the backbone and the conclusion.
+
+  ## Clustering rule
+  Cluster primarily by the **backbone**.
+
+  Use the **closing engine** to split proofs only when it is an essential, non-routine reason the proof works.
+
+  Do **not** cluster by broad family alone.
+
+  # Pairwise clustering criteria
+
+  ## Put two proofs in the same cluster if:
+  - they share the same backbone, and
+  - they reach the result for the same essential mathematical reason,
+  even if they differ in wording, notation, order, level of detail, or minor helper tools.
+
+  ## Put two proofs in different clusters only if you can clearly state:
+  - "One proof hinges on X, while the other hinges on Y,"
+  or
+  - "One proof translates the problem into X, while the other instead uses Y,"
+
+  If you cannot articulate a clear method-level difference, prefer merging.
+
+  # Differentiating the proof scaffold vs engine
+
+  If two proofs share the same setup or initial construction, do not automatically merge them. Instead, check whether they differ in the following manner:
+  - Same scaffold + same essential reason for finishing => same cluster
+  - Same scaffold + different essential non-routine finishing engine => different clusters
+  - Same scaffold + different routine algebra => same cluster
+
+  # Determining equivalent methods
+
+  Treat two proofs as the same method when they use mathematically equivalent realizations of the same backbone, even if they:
+  - introduce different auxiliary objects
+  - phrase the same construction differently
+  - derive the same key relation through different local manipulations
+  - present the same symmetry or transform through different language
+
+  If the mathematical role is the same, prefer merging.
+
+  # What does not make a new cluster
+
+  Do not split proofs just because of:
+  - different notation or variable names
+  - different exposition style
+  - different order of steps
+  - one proof being more polished or detailed
+  - naming a theorem versus using it implicitly
+  - minor local casework inside the same global plan
+  - different algebraic packaging of the same derived relation
+  - a cosmetic lemma that merely restates the key step
+  - a different auxiliary object playing the same structural role
+
+  # What makes a new cluster
+
+  Split proofs when they have a genuinely different:
+  - strategic paradigm
+  - representation of the problem
+  - backbone construction or reduction
+  - invariant, extremal quantity, or inductive mechanism
+  - decisive theorem or lemma, if that theorem is the real engine
+  - constructive mechanism
+  - reason the proof closes
+
+  # Cluster naming rule
+
+  Labels such as “algebraic,” “geometric,” “reflection,” “greedy,” “Vieta,” “casework,” or “symmetry” are too broad by themselves.
+
+  A cluster name should identify the actual backbone and, when essential, the closing engine.
+
+  # Incorrect or incomplete proofs
+
+  - If a proof is incorrect but clearly intends a recognizable method, cluster it by intended method.
+  - If it is too vague to identify a real method, place it in an `Unclear / Non-proof` cluster.
+  - Do not invent missing key steps.
+  - Do not assume a standard argument unless the text supports it.
+
+  # Pipeline
+
+  ## Step 1: Build a method fingerprint for each proof
+  For each `Proof i`, identify:
+  - primary approach
+  - secondary techniques
+  - key pivot step
+  - evidence quotes
+
+  The fingerprint must be based only on what appears in the proof.
+
+  ## Step 2: Make pairwise equivalence judgments
+  For each pair, ask:
+  “Would a knowledgeable mathematician describe these as the same proof idea?”
+
+  This judgment must depend only on the two proofs, not on the rest of the batch.
+
+  ## Step 3: Form clusters
+  Create clusters from those pairwise judgments.
+
+  Each cluster must include:
+  - a concise cluster name
+  - the defining approach
+  - member proofs
+  - a short list of distinct features
+
+  ## Step 4: Consistency check
+  Before finalizing:
+  - merge clusters that differ only in phrasing
+  - split clusters that hide clearly different essential engines
+  - check whether any near-duplicate proofs were accidentally separated
+  - check whether any proofs were merged only because they share a broad family label
+
+  ## Output format
+
+  Return exactly the following JSON shape, with no extra fields and no commentary outside the JSON.
+
+  ```json
+  {{
+  "N": 0,
+  "K": 0,
+  "diversity_score_D": 0.0,
+  "clusters": [
+    {{
+    "cluster_id": "C1",
+    "cluster_name": "",
+    "defining_approach": "",
+    "defining_features": ["", ""],
+    "members": [1]
+    }}
+  ],
+  "proof_fingerprints": [
+    {{
+    "proof_id": 1,
+    "primary_approach": "",
+    "secondary_techniques": ["", ""],
+    "key_pivot_step": "",
+    "evidence_quotes": ["", ""]
+    }}
+  ],
+  "warnings": ["", ""]
+  }}
+  ```
+
+  ## Input
+
+  ### Problem
+
+  {problem}
+
+  ### Solutions
+
+  {solution_summary}
+multi_input_placeholders:
+  - solution_summary
+data_path: "data/postprocess/matharena_proofs/all_sols_ok.json"
+n_solutions: -1

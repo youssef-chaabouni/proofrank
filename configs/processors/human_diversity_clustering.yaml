@@ -1,0 +1,138 @@
+
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "human_diversity_clustering"
+task: "diversity"
+prompt: |
+  Your task is to analyze multiple candidate proofs of the same problem and cluster them by core mathematical approach and techniques used.
+
+  ### Inputs
+  You will receive the problem statement and $N$ proofs labeled from 1 to N.
+
+  ### Goal
+  1. Identify the primary approach of each proof.
+  2. Cluster proofs into separate approach cluster, where each cluster represents the same core method.
+  3. Report the:
+    - Number of clusters $K$
+    - Cluster memberships
+    - A short description of each cluster's defining technique(s)
+    - A qualitative summary
+
+  ### What defines a cluster
+  Two proofs belong in different clusters if and only if a knowledgeable mathematician would say they are meaningfully different methods, e.g.:
+
+  - **Different major proof paradigms**: induction vs contradiction vs extremal principle vs invariants, or other general paradigms.
+  - **Different representation/translation**: for example in Combinatorics, algebraic manipulation vs geometric argument vs combinatorial counting vs graph modeling vs probabilistic method.
+  - **Different key lemma or key idea**: for example in Algebraic Inequalities, the use of Cauchy-Schwarz / Jensen / AM-GM vs rearrangement; or a constructive algorithm vs compactness argument.
+  - **Different structural plan**: direct proof vs reduction to a known theorem vs proof by minimal counterexample vs forward-backward vs case bash.
+
+  ### What does not define a different appraoch
+  Do not split two proofs into different clusters for:
+
+  - Rewording, different variable names, different ordering of steps
+  - More/less detail, different exposition style
+  - Same technique with minor variations (e.g., both are induction but one uses strong induction without changing the core idea)
+  - Same inequality tool applied in slightly different algebraic sequences
+  - Cosmetic "new lemma" that is just a restatement of the same core step
+
+  ### Handling hybrid proofs
+  A proof may use multiple techniques. Assign:
+  - **Primary technique/approach**, the method without which the proof would not work.
+  - **Secondary techniques**, any supporting tools.
+
+  Cluster primarily by the primary approach, unless two proofs share a primary approach but differ by a genuinely different central insight/lemma that changes the method category.
+
+  ### Correctness vs diversity
+  - Your main job is diversity of approaches, not grading correctness.
+  - Handle incorrect proofs as follows:
+    - If an incorrect proof clearly intends a recognizable approach, cluster by intended approach.
+    - If an incorrect proof is too vague to identify an approach, put it in a "Unclear/Non-proof" cluster.
+
+  ## Procedure
+
+  ### Step 1: Normalize each proof into a "method fingerprint"
+  For each `Proof i`, produce:
+
+  1. Primary approach label
+  2. Secondary techniques (0-4 items)
+  3. Key pivot step: 1-2 short sentences describing the central insight/lemma/transform
+
+  For each assigned technique, cite a short quote or pinpointed reference from the proof. Make sure you do not include steps that are not present in the solution.
+
+  ### Step 2: Compute pairwise method similarity
+  Compare proofs by their fingerprints and decide whether they are the same cluster or different clusters. You do not need to output a full matrix, but your clustering must be consistent with your described criteria.
+
+  ### Step 3: Produce clusters
+  Create clusters where each cluster has:
+  - Cluster name (concise)
+  - Defining approach/technique
+  - Member proofs
+  - 2-4 bullet points of what makes that cluster distinct
+
+  If two proofs are borderline (could be same or different), prefer merging unless you can articulate a clear, method-level reason to split.
+
+  ### Step 4: Diversity reporting
+  Report:
+  - $N$ = number of proofs
+  - $K$ = number of clusters
+  - A diversity score:
+    - Primary score: $D = K/N$ (report as decimal)
+    - Include optional nuance if deemed appropriate.
+  - A short diversity narrative: what range of methods appears, and what is missing.
+
+  ## Pitfalls & failure modes to actively guard against
+  You must explicitly check for these and avoid them:
+
+  1. **Style bias**: Do not create extra clusters because one proof is verbose or uses different notation.
+  2. **False novelty**: Do not treat "namedropping" a theorem as a new method if it is not actually used.
+  3. **Missing-key-step camouflage**: If a proof skips the essential argument, do not assume it matches a known technique unless evidence exists.
+  4. **Over-splitting on subtools**: Don't split clusters solely because one uses AM-GM and another uses Cauchy-Schwarz if both are doing the same inequality-driven plan, unless the core structure differs (e.g., convexity/Jensen vs quadratic form).
+  5. **Under-splitting distinct paradigms**: If one proof is extremal and another is invariant, they should almost certainly be different clusters even if both are short.
+  6. **Problem-dependent technique meaning**: E.g., "casework" might be superficial or might be the main engine, decide which.
+  7. **Duplicate proofs**: If two proofs are essentially identical, say so explicitly.
+
+  ## Output format
+
+  Return this shape exactly without modifications:
+
+  ```json
+  {{
+    "N": 0,
+    "K": 0,
+    "diversity_score_D": 0.0,
+    "clusters": [
+      {{
+        "cluster_id": "C1",
+        "cluster_name": "",
+        "defining_approach": "",
+        "defining_features": ["", ""],
+        "members": [1]
+      }}
+    ],
+    "proof_fingerprints": [
+      {{
+        "proof_id": 1,
+        "primary_approach": "",
+        "secondary_techniques": ["", ""],
+        "key_pivot_step": "",
+        "evidence_quotes": ["", ""]
+      }}
+    ],
+    "warnings": ["", ""]
+  }}
+  ```
+
+  ## Now analyze the following
+
+  ### Problem
+
+  {problem}
+
+  ### Solutions
+
+  {solution}
+multi_input_placeholders:
+  - solution
+include_human: true
+data_path: "data/postprocess/matharena_proofs/human_sols.json"
+n_solutions: -1

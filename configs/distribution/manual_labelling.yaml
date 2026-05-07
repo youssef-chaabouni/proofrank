@@ -1,0 +1,9 @@
+n_problems: 105
+overlap: 0.4
+judge_file: "configs/judges/manual_labelling.json"
+competition_weight:
+  aime: 1
+  hmmt: 1
+  apex: 1
+  shortlist: 1
+  imo-bench: 3

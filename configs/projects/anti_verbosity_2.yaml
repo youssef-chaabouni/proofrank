@@ -1,0 +1,10 @@
+name: "Sycophancy Bench (Original Recent Problems)"
+slug: "anti_verbosity_2"
+admins:
+  - "sycophancy-1"
+
+model_configs:
+  - 'deepseek/deepseek_v32_think'
+  - 'gemini/gemini-3-flash'
+  - 'moonshot/k25'
+  - "openai/oss-120b"

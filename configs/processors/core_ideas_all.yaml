@@ -1,0 +1,100 @@
+
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "core_ideas_all"
+task: "core_ideas"
+prompt: |
+  You are an expert mathematical annotator tasked with extracting the core method fingerprint of a provided solution.
+
+  # Main task
+
+  Identify the central mathematical idea that makes this particular solution work.
+
+  Focus on the method actually present in the provided solution text.  
+  Do not solve the problem yourself.  
+  Do not repair missing steps.  
+  Do not add steps that are not explicitly supported by the solution.
+
+  # Analysis
+
+  Analyze the solution at three levels:
+
+  1. **Family / viewpoint**  
+  The broad style, such as algebraic, geometric, combinatorial, constructive, extremal, invariant-based.
+
+  2. **Backbone**  
+  The main structural move that sets up the solution, such as a reflection construction, polynomial-root encoding, greedy maintenance strategy, block decomposition, reduction to a theorem, or symmetry-based transformation.
+
+  3. **Closing engine**  
+  The theorem, lemma, or decisive move that turns the backbone into the conclusion.
+
+  The **backbone** is the most important field.  
+  The **closing engine** should be recorded when it is a real mathematical ingredient, not just routine simplification.
+
+  # Requirements
+
+  1. Identify what makes the solution work conceptually, not how to carry out the computations.
+  2. Do not solve the problem on your own.
+  3. Do not include chain-of-thought, hidden reasoning, or speculative reconstruction.
+  4. Do not fill in missing steps.
+  5. Work only with what is explicitly present or very strongly signaled in the solution text.
+  6. If the solution is incomplete but its intended method is still recognizable, describe that intended method.
+  7. If the text is too vague to identify a genuine nontrivial method, set `noCoreIdea` to `true` and use `null` where appropriate.
+  8. Avoid generating equations or calculations yourself. Short verbatim evidence quotes may contain formulas if they appear in the provided solution.
+  9. Write `coreIdea` and `supportingIdeas` in an imperative, hint-like style.
+  10. Keep labels method-specific. Avoid broad labels such as "use algebra," "use symmetry," or "use geometry" unless no more specific description is supported.
+
+  # Output format
+
+  Your response must include:
+
+  - **noCoreIdea**: whether the provided solution lacks an identifiable nontrivial core idea
+  - **solutionSummary**: a concise summary of the solution's method and structure, written descriptively
+  - **coreIdea**: one short imperative sentence giving the main hint
+  - **supportingIdeas**: zero to three short imperative phrases for secondary ideas
+  - **family**: the broad mathematical viewpoint
+  - **backbone**: the main structural move that defines the method
+  - **closingEngine**: the decisive theorem, lemma, or final mechanism, or `null` if none is identifiable
+  - **evidenceQuotes**: one to three short quotes or pinpointed references from the solution supporting your identification
+  - **confidence**: a number between $0$ and $1$
+
+  # Style guidelines
+
+  - `solutionSummary` should be descriptive, compact, and reconstruction-friendly.
+  - `coreIdea` should be short, concrete, and method-level.
+  - `supportingIdeas` should name supporting moves, not computations.
+  - Do not mention steps that are absent from the solution.
+  - Do not overstate confidence when the proof is sketchy or incomplete.
+
+  # Schema
+
+  ```json
+  {{
+  "noCoreIdea": false,
+  "solutionSummary": "",
+  "coreIdea": "",
+  "supportingIdeas": [],
+  "family": "",
+  "backbone": "",
+  "closingEngine": null,
+  "evidenceQuotes": [],
+  "confidence": 0.0
+  }}
+  ```
+  # Notes
+
+  - Use `noCoreIdea = true` only when the solution text does not support a recognizable central method.
+  - If the proof is short but clearly method-driven, do **not** mark it as lacking a core idea.
+  - If the proof names a theorem but does not actually use it, do not treat that theorem as the backbone or closing engine.
+  - If two descriptions would differ only in wording, prefer the more concrete mathematical description.
+
+  # Input
+
+  ## Problem
+  {problem}
+
+  ## Solution
+  {solution}
+include_human: false
+data_path: "data/postprocess/matharena_proofs/all_sols_ok.json"
+n_solutions: -1

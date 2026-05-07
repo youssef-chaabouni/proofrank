@@ -1,0 +1,12 @@
+model: human
+api: human
+max_tokens: 0
+read_cost: 0
+write_cost: 0
+concurrent_requests: 0
+temperature: null
+top_p: null
+human_readable_id: Human Solver
+batch_processing: false
+openai_responses: false
+date: "2025-08-07"

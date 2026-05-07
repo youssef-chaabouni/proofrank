@@ -1,0 +1,18 @@
+default_max_tokens: 64000
+default_temperature: 0.6
+name: "verbosity_rephrase_2"
+prompt: |
+  Your task is to rephrase the following solution to a mathematical problem to make it less verbose without omitting any important details. Ensure that the rephrased solution remains clear and accurate while being more concise. Follow these guidelines:
+  - Retain all critical steps and explanations necessary for understanding the solution.
+  - Do not introduce any new information or change the meaning of the original solution.
+  - The new solution must be equivalent to the original in terms of correctness and completeness.
+  - Do not omit any computations that were critical to the solution.
+
+
+  Original Problem:
+  {problem}
+
+  Original Solution:
+  {solution}
+data_path: "data/postprocess/anti_verbosity/test_samples.json"
+n_solutions: -1

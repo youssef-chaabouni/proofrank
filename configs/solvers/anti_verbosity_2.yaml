@@ -1,0 +1,21 @@
+prompt: |
+  Your task is to write a proof solution to the following problem, focusing on conciceness. You should make sure that your proof contains as little extra comments as possible, and is as concise as possible so long as the proof is correct. When you write your proof, follow these guidelines:
+
+  - You are creating a proof, not a proof outline. Each step should be carefully explained and documented.
+  - Make sure the proof is as concise as possible while still being correct. Avoid additional explanations or comments that are not strictly necessary for the correctness of the proof.
+
+  {problem}
+prompt_gold: |
+  Your task is to write a proof solution to the following problem, focusing on conciceness. You should make sure that your proof contains as little extra comments as possible, and is as concise as possible so long as the proof is correct. When you write your proof, follow these guidelines:
+
+  - You are creating a proof, not a proof outline. Each step should be carefully explained and documented.
+  - Make sure the proof is as concise as possible while still being correct. Avoid additional explanations or comments that are not strictly necessary for the correctness of the proof.
+
+  {problem}
+n_attempts: 10
+n_samples: -1
+n_solutions: 1
+problem_regexes:
+  - .*
+allow_shuffle: true
+overwrite: false
