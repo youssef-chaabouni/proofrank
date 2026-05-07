@@ -270,10 +270,6 @@ class APIQuery:
             self.api_key = "token-abc123"
             self.api = "openai"
             self.base_url = f"http://localhost:8000/v1"
-        elif self.api == "sri":
-            self.api_key = os.getenv("SRI_API_KEY")
-            self.base_url = "https://srlx.inf.ethz.ch/openai"
-            self.api = "openai"
         elif self.api == "glm":
             self.api_key = os.getenv("GLM_API_KEY")
             self.base_url = "https://api.z.ai/api/paas/v4/"
