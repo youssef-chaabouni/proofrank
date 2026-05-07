@@ -6,9 +6,9 @@ from pathlib import Path
 from typing import Any, Dict, List
 import numpy as np
 
-from llmteach.pairwise.io import print_markdown_table
-from llmteach.pairwise.graph_utils import cluster_density_metrics, transitivity_violations
-from llmteach.pairwise.loader import load_pairwise_records
+from proofrank.pairwise.io import print_markdown_table
+from proofrank.pairwise.graph_utils import cluster_density_metrics, transitivity_violations
+from proofrank.pairwise.loader import load_pairwise_records
 
 
 DEFAULT_TARGET_MODELS = [

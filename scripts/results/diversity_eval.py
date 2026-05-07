@@ -4,8 +4,8 @@ import itertools
 import argparse
 from typing import Dict, List
 from collections import defaultdict
-from llmteach.diversity import DiversityAnalysisParser
-from llmteach.postprocess import fix_thinking
+from proofrank.diversity import DiversityAnalysisParser
+from proofrank.postprocess import fix_thinking
 
 
 def load_grouped_data(filepath: str) -> Dict[str, List[str]]:

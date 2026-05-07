@@ -4,21 +4,21 @@ import re
 import json
 import pandas as pd
 import numpy as np
-from llmteach.analysis.verbosity_prevention_utils import _model_accuracy_from_correctness_map, replacement_elo_change_for_model_swap
+from proofrank.analysis.verbosity_prevention_utils import _model_accuracy_from_correctness_map, replacement_elo_change_for_model_swap
 from loguru import logger
 from tqdm import tqdm
 from pathlib import Path
-from llmteach.parser import find_last_boxed_content
-from llmteach.postprocess import fix_thinking
-from llmteach.analysis.verbosity import print_verbosity_stats, calculate_length_timeout
-from llmteach.analysis.problem_classification import fix_class
-from llmteach.analysis.pairwise_comparison import report_rankings
-from llmteach.diversity import DiversityAnalysisParser
-from llmteach.technique_diversity import TechniqueDiversityParser
-from llmteach.result_utils import parse_outputs
+from proofrank.parser import find_last_boxed_content
+from proofrank.postprocess import fix_thinking
+from proofrank.analysis.verbosity import print_verbosity_stats, calculate_length_timeout
+from proofrank.analysis.problem_classification import fix_class
+from proofrank.analysis.pairwise_comparison import report_rankings
+from proofrank.diversity import DiversityAnalysisParser
+from proofrank.technique_diversity import TechniqueDiversityParser
+from proofrank.result_utils import parse_outputs
 from collections import defaultdict
-from llmteach.analysis.diversity_utils import *
-from llmteach.analysis.verbosity_prevention_utils import *
+from proofrank.analysis.diversity_utils import *
+from proofrank.analysis.verbosity_prevention_utils import *
 parser = argparse.ArgumentParser()
 parser.add_argument("--output-folder", type=str, default="outputs")
 parser.add_argument("--configs-folder", type=str, default="configs/")

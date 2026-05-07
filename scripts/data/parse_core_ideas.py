@@ -1,5 +1,5 @@
-from llmteach.core_idea import CoreIdeaAnnotationParser
-from llmteach.postprocess import fix_thinking
+from proofrank.core_idea import CoreIdeaAnnotationParser
+from proofrank.postprocess import fix_thinking
 from pathlib import Path
 import argparse
 import json

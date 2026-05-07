@@ -1,8 +1,8 @@
 import argparse
 import itertools
 from pathlib import Path
-from llmteach.result_utils import parse_outputs
-from llmteach.parser import find_last_boxed_content
+from proofrank.result_utils import parse_outputs
+from proofrank.parser import find_last_boxed_content
 
 TARGET_MODELS = {
     "deepseek/deepseek_v32_think",

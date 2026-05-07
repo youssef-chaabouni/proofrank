@@ -7,8 +7,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from llmteach.pairwise.io import iter_json_files, print_markdown_table, write_csv
-from llmteach.pairwise.loader import (
+from proofrank.pairwise.io import iter_json_files, print_markdown_table, write_csv
+from proofrank.pairwise.loader import (
     ground_truth_record_builder,
     load_pairwise_records,
 )

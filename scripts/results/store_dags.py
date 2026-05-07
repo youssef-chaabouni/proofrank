@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
-from llmteach.dag import SolutionGraphParser
-from llmteach.analysis.dag_parsing import analyse_single
+from proofrank.dag import SolutionGraphParser
+from proofrank.analysis.dag_parsing import analyse_single
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import json

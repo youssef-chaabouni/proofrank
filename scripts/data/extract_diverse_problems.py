@@ -2,8 +2,8 @@ import json
 import os
 from pathlib import Path
 from tqdm import tqdm
-from llmteach.diversity import DiversityAnalysisParser
-from llmteach.postprocess import fix_thinking
+from proofrank.diversity import DiversityAnalysisParser
+from proofrank.postprocess import fix_thinking
 from collections import defaultdict
 import argparse
 from copy import deepcopy
