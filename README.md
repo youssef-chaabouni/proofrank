@@ -1,11 +1,11 @@
 # Not All Proofs Are Equal: Evaluating LLM Proof Quality Beyond Correctness
 
-This repository contains the code for the NeurIPS 2026 submission **Not All Proofs Are Equal: Evaluating LLM Proof Quality Beyond Correctness**. We include all details necessary for
+This repository contains the code for the NeurIPS 2026 submission **Not All Proofs Are Equal: Evaluating LLM Proof Quality Beyond Correctness**.
 
 
 # Installation
 
-We offer 2 separate ways of installing the `ProofRank` package, dependent on your whether you want to run the benchmark only using an API, or by locally running vLLM instances.
+We offer 2 separate ways of installing the `proofrank` package, dependent on your whether you want to run the benchmark only using an API, or by locally running vLLM instances.
 
 ### API Inference
 
