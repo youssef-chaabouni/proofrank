@@ -1,0 +1,10 @@
+model: bedrock/llama-4-maverick-17b
+api: parley
+max_tokens: 4096
+read_cost: 0.02
+write_cost: 0.02
+concurrent_requests: 4
+temperature: null
+top_p: null
+human_readable_id: Llama 4 Maverick 17B (Parley, free)
+date: "2026-09-17"

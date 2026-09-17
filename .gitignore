@@ -1,3 +1,9 @@
 CLAUDE.md
 __pycache__/
 *.egg-info/
+
+# Generated pipeline run artifacts (reproducible from data/raw + configs/)
+data/unsolved/
+data/solved/
+data/postprocess/
+data/locks/

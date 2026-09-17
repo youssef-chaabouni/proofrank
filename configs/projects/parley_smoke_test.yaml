@@ -1,0 +1,7 @@
+name: "Parley Smoke Test"
+slug: "parley_smoke_test"
+admins:
+  - "parley-1"
+
+model_configs:
+  - "parley/llama-4-maverick"

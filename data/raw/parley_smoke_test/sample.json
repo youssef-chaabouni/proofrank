@@ -1,0 +1,10 @@
+[
+    {
+        "problem_id": "smoke_1",
+        "problem": "Prove that for every positive integer n, 1 + 2 + ... + n = n(n+1)/2."
+    },
+    {
+        "problem_id": "smoke_2",
+        "problem": "Prove that there are infinitely many prime numbers."
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "problem_id": "imo-bench_number_theory-094",
+        "problem": "Let $\\tau(n)$ be the number of positive divisors of a positive integer $n$. Find all positive integers $n$ such that $n = \\tau(n^{12})$.\n",
+        "gold_answer": "1, 13, 25, 325"
+    },
+    {
+        "problem_id": "imo-bench_geometry-099",
+        "problem": "Let $XYZ$ be a triangle with circumcenter $Q$, $X$-excenter $J_X$, $Y$-excenter $J_Y$, and $Z$-excenter $J_Z$. The incircle of $\\Delta XYZ$ is tangent to sides $YZ, ZX,$ and $XY$ at $U, V,$ and $W$ respectively. Lines $J_YV$ and $J_ZW$ intersect at $R$. If the line through $Q$ perpendicular to $QR$ passes through $J_X$, compute $\\frac{\\angle X}{5}$ in terms of degree.\n",
+        "gold_answer": "12"
+    },
+    {
+        "problem_id": "imo-bench_combinatorics-037",
+        "problem": "L\u00ea B\u00e1 Kh\u00e1nh Tr\u00ecnh is a famous Vietnamese IMO contestant who won Vietnam's only Special Prize. He enjoys solving mathematics problems and dancing. As the IMO is coming soon, he is studying the following mathematical problem:\n\nA subset $S$ of $\\{0, 1, 2, \\ldots \\}$ is called Bachata if $0 \\in S$ and for each element $n \\in S,$ the integers $n + 11$ and $n + 20$ belong to $S.$\n\nPlease determine the number of Bachata subsets of $\\{0, 1, 2, \\ldots \\}.$\n",
+        "gold_answer": "2731365"
+    },
+    {
+        "problem_id": "hmmt_feb_2025_9",
+        "problem": "Let $f$ be the unique polynomial of degree at most $2026$ such that for all $n \\in\\{1,2,3, \\ldots, 2027\\}$,\n$$\nf(n)= \\begin{cases}1 & \\text { if } n \\text { is a perfect square } \\\\ 0 & \\text { otherwise }\\end{cases}\n$$\n\nSuppose that $\\frac{a}{b}$ is the coefficient of $x^{2025}$ in $f$, where $a$ and $b$ are integers such that $\\operatorname{gcd}(a, b)=1$. Compute the unique integer $r$ between $0$ and $2026$ (inclusive) such that $a-r b$ is divisible by $2027$. (Note that $2027$ is prime.)",
+        "gold_answer": "1037"
+    },
+    {
+        "problem_id": "imo-bench_geometry-094",
+        "problem": "Points $P, Q,$ and $R$ are on a circle such that $\\triangle PQR$ is an acute triangle. $L, M ,$ and $N$ are on the circle such that $PL$ is perpendicular to $QR$ at $S$, $QM$ is perpendicular to $PR$ at $T$, and $RN$ is perpendicular to $PQ$ at $U$. Find the value of\\[ \\frac{2PL}{PS}+\\frac{2QM}{QT}+\\frac{2RN}{RU}\\]\n",
+        "gold_answer": "8"
+    },
+    {
+        "problem_id": "apex_2025_2",
+        "problem": "Let $P$ be a polygon formed by the edges of an infinite chessboard, which does not intersect itself. Let the numbers $a_1,a_2,a_3$ represent the number of unit squares that have exactly $1,2\\text{ or } 3$ edges on the boundary of $P$ respectively. Find the largest real number $k$ such that the inequality $a_1+a_2>ka_3$ holds for each polygon constructed with these conditions.",
+        "gold_answer": "1/2"
+    },
+    {
+        "problem_id": "imo-bench_combinatorics-081",
+        "problem": "The Bank of Berlin issues coins made out of two types of metal: aluminium (denoted $A$ ) and copper (denoted $C$ ). Sophia has $255$ aluminium coins, and $255$ copper coins, and arranges her $510$ coins in a row in some arbitrary initial order.  Given a fixed positive integer $k \\leqslant 510$, she repeatedly performs the following operation: identify the largest subsequence containing the $k$-th coin from the left which consists of consecutive coins made of the same metal, and move all coins in that subsequence to the left end of the row. For example, if there are $4$ aluminum coins and $4$ copper coins and $k=4$, the process starting from the configuration $A A C C C A C A$ would be\n\n\\[\nA A C C C A C A \\rightarrow C C C A A A C A \\rightarrow A A A C C C C A \\rightarrow C C C C A A A A \\rightarrow \\cdots\n\\]\n\nIn addition to aluminium and copper coins, Sophia also has a few silver coins that she keeps separate from her aluminium and copper coins.\n\nLet $a$ and $b$ be the smallest and largest positive integer $k$ with $1 \\leqslant k \\leqslant 510$ such that for every initial configuration, at some point of the process there will be at most one aluminium coin adjacent to a copper coin. Find the product $ab$.",
+        "gold_answer": "97665"
+    },
+    {
+        "problem_id": "imo-bench_combinatorics-077",
+        "problem": " Players $A$ and $B$ play a game on a blackboard that initially contains 1997 copies of the number 1. In every round, player $A$ erases two numbers $x$ and $y$ from the blackboard, and then player $B$ writes one of the numbers $x+y$ and $|x-y|$ on the blackboard. The game terminates as soon as, at the end of some round, one of the following holds:\n\n(1) one of the numbers on the blackboard is larger than the sum of all other numbers;\n\n(2) there are only zeros on the blackboard.\n\nPlayer $B$ must then give as many cookies to player $A$ as there are numbers on the blackboard. Player $A$ wants to get as many cookies as possible, whereas player $B$ wants to give as few as possible. Determine the number of cookies that $A$ receives if both players play optimally.",
+        "gold_answer": "8"
+    },
+    {
+        "problem_id": "imo-bench_geometry-054",
+        "problem": "Point $P$ lies on side $YZ$ of $\\triangle XYZ$ so that $\\overline{XP}$ bisects $\\angle YXZ$. The perpendicular bisector of $\\overline{XP}$ intersects the bisectors of $\\angle XYZ$ and $\\angle XZY$ in points $Q$ and $R$, respectively. Given that $XY=4$, $YZ=6$, $ZX=8$, the area of $\\triangle XQR$ can be written as $\\frac{m\\sqrt n}{p}$, where $m$ and $p$ are relatively prime positive integers, and $n$ is a positive integer not divisible by the square of any prime. Find $m+n+p$.\n",
+        "gold_answer": "26"
+    },
+    {
+        "problem_id": "apex_2025_9",
+        "problem": "Let $R$ be the region in the complex plane enclosed by the curve $f(\\theta)=e^{i \\theta}+e^{2 i \\theta}+\\frac{1}{3} e^{3 i \\theta}$ for $0 \\leq$ $\\theta \\leq 2 \\pi$. Compute the perimeter of $R$.",
+        "gold_answer": "2 \\sqrt{3}+\\frac{8 \\pi}{3}"
+    },
+    {
+        "problem_id": "shortlist_2025_9",
+        "problem": "Fix an integer $n \\geq 3$. Determine the smallest positive integer $k$ satisfying the following condition:\n\nFor any tree $T$ with vertices $v_1, v_2, \\dots, v_n$ and any pairwise distinct complex numbers $z_1, z_2, \\dots, z_n$, there is a polynomial $P(X, Y)$ with complex coefficients of total degree at most $k$ such that for all $i \\neq j$ satisfying $1 \\leq i, j \\leq n$, we have $P(z_i, z_j) = 0$ if and only if there is an edge in $T$ joining $v_i$ to $v_j$.\n\nNote, for example, that the total degree of the polynomial\n$$\n9X^3Y^4 + XY^5 + X^6 - 2\n$$\nis 7 because $7 = 3 + 4$.\n",
+        "gold_answer": "n-1"
+    },
+    {
+        "problem_id": "imo-bench_number_theory-002",
+        "problem": "Find the number of all positive integers $2\\leq m \\leq 2000$ that satisfy the following condition: For any $m$ distinct positive integers $(n_1, \\ldots, n_m)$, at least one of the following two conditions holds: $n_1 + \\ldots + n_m$ is a multiple of $m$, or there exists a permutation $(k_1, \\ldots, k_m)$ such that $k_1 + 2k_2 + \\ldots + mk_m$ is a multiple of $m$.\n",
+        "gold_answer": "1009"
+    }
+]

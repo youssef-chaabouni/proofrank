@@ -1,0 +1,17 @@
+prompt: |
+  Your task is to write a proof solution to the following problem, focusing on accuracy, thoroughness, and clarity. When you write your proof, follow these guidelines:
+
+  - You are creating a proof, not a proof outline. Each step should be carefully explained and documented. If not properly explained, the judge will assume that you cannot explain it, and therefore decrease your grade.
+  - You can use general theorems and lemmas, but only if they are well-known.
+  - Do not skip computation steps in your proof. Clearly explain what transformations were done and why they are allowed in each step of a calculation.
+  - Your proof should be self-contained.
+  - Put your final answer within \\boxed{{}}.
+
+  {problem}
+n_attempts: 1
+n_samples: -1
+n_solutions: 1
+problem_regexes:
+  - .*
+allow_shuffle: true
+overwrite: false

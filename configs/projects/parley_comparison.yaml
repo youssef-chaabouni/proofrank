@@ -1,0 +1,7 @@
+name: "Parley Comparison"
+slug: "parley_comparison"
+admins:
+  - "parley-1"
+
+model_configs:
+  - "parley/llama-4-maverick"
