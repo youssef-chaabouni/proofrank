@@ -274,6 +274,10 @@ class APIQuery:
             self.api_key = os.getenv("GLM_API_KEY")
             self.base_url = "https://api.z.ai/api/paas/v4/"
             self.api = "openai"
+        elif self.api == "parley":
+            self.api_key = os.getenv("PARLEY_API_KEY")
+            self.base_url = "https://parley.api.mit.edu/v1"
+            self.api = "openai"
         elif self.api == "vllm_async" or self.api == "vllm":
             return
         else:
@@ -1279,17 +1283,15 @@ class APIQuery:
             while response is None and n_retries < self.max_retries_inner:
                 n_retries += 1
                 try:
-                    response = client.chat.completions.create(
-                        model=self.model,
-                        messages=messages + output_messages,
-                        tools=(
-                            None
-                            if current_tool_calls >= max_tool_calls
-                            else self.tool_descriptions
-                        ),
-                        timeout=self.timeout,
+                    create_kwargs = {
+                        "model": self.model,
+                        "messages": messages + output_messages,
+                        "timeout": self.timeout,
                         **self.kwargs,
-                    )
+                    }
+                    if current_tool_calls < max_tool_calls:
+                        create_kwargs["tools"] = self.tool_descriptions
+                    response = client.chat.completions.create(**create_kwargs)
                 except Exception as e:
                     logger.info(f"Got OpenAI error: {e}")
                     time.sleep(60)
