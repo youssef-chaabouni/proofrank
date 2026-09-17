@@ -1,7 +1,7 @@
 import argparse
 import os
-from llmteach.runner import run
-from llmteach.results_processors import (
+from proofrank.runner import run
+from proofrank.results_processors import (
     ResultsProcessor,
     DefaultProcessor,
     JudgeProcessor,

@@ -4,9 +4,7 @@ import os
 import json
 import sympy
 from .parser import WarningType, find_last_boxed_content
-from .dag import SolutionGraphParser
 from .diversity import DiversityAnalysisParser
-from .dag_classifier import GraphMetricsParser
 from .technique_diversity import TechniqueDiversityParser
 from .reformat import CleanedMathProblemParser
 from .core_idea import CoreIdeaAnnotationParser
@@ -153,6 +151,12 @@ class JSONParsingProcessor(DefaultProcessor):
 class DAGProcessor(JSONParsingProcessor):
     def __init__(self):
         super().__init__()
+        try:
+            from .dag import SolutionGraphParser
+        except ImportError:
+            raise ImportError(
+                "proofrank.dag module is not available; DAGProcessor cannot be used."
+            )
         self.parser = SolutionGraphParser()
 
     def log_processing_start(self):
@@ -162,6 +166,13 @@ class DAGProcessor(JSONParsingProcessor):
 class GraphMetricsProcessor(JSONParsingProcessor):
     def __init__(self):
         super().__init__()
+        try:
+            from .dag_classifier import GraphMetricsParser
+        except ImportError:
+            raise ImportError(
+                "proofrank.dag_classifier module is not available; "
+                "GraphMetricsProcessor cannot be used."
+            )
         self.parser = GraphMetricsParser()
 
     def log_processing_start(self):

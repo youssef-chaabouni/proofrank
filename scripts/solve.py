@@ -1,6 +1,6 @@
-from llmteach.solve import solve
-from llmteach.configs import load_config
-from llmteach.best_of_n import single, random_selector, dual
+from proofrank.solve import solve
+from proofrank.configs import load_config
+from proofrank.best_of_n import single, random_selector, dual
 from concurrent.futures import ThreadPoolExecutor
 from loguru import logger
 import os

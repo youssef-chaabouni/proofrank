@@ -213,9 +213,7 @@ def save_file(
     os.makedirs(os.path.dirname(file_lock_path), exist_ok=True)
 
     # --------- begin critical section ---------
-    lock = FileLock(
-        file_lock_path + ".lock", unlink_on_release=True
-    )  # one lock per JSON file
+    lock = FileLock(file_lock_path + ".lock")  # one lock per JSON file
     try:
         with lock.acquire(timeout=timeout):
             # 1) read the current contents (if any)

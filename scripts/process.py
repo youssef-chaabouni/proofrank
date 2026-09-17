@@ -2,7 +2,7 @@ import os
 import json
 import re
 import argparse
-from llmteach.configs import load_config
+from proofrank.configs import load_config
 from datetime import datetime
 
 parser = argparse.ArgumentParser(description="Process problems.")

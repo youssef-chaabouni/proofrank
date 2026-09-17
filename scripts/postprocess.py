@@ -1,6 +1,6 @@
 import argparse
-from llmteach.configs import load_config
-from llmteach.postprocess import (
+from proofrank.configs import load_config
+from proofrank.postprocess import (
     process_sample,
     exclude_basic,
     join,

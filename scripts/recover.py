@@ -2,8 +2,8 @@ import os
 import json
 import argparse
 import glob
-from llmteach.configs import load_config
-from llmteach.recover import recover
+from proofrank.configs import load_config
+from proofrank.recover import recover
 
 
 if __name__ == "__main__":
