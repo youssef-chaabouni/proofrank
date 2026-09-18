@@ -634,7 +634,7 @@ class APIQuery:
                 "output_tokens": 0,
             }
 
-    def run_query(self, query, allow_tools=False):
+    def run_query(self, query, allow_tools=True):
         query = self.prepare_query(query)
         if self.api == "openai":
             return self.openai_query_with_tools(query, allow_tools=allow_tools)
@@ -1132,8 +1132,6 @@ class APIQuery:
                                 "No usage info in response -> if in background, this mean exception occured."
                             )
                 except Exception as e:
-                    if "rate limit" not in str(e).lower() and "429" not in str(e):
-                        total_retries += 1
                     time.sleep(60)
                     logger.error(
                         f"Got OpenAI error in responses api inner. Exception: {e}"
